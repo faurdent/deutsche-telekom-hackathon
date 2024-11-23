@@ -1,0 +1,2 @@
+dataset_name,dataset_context,dataset_path
+time_series_covid19_deaths_global,"Numbers of pepole which died from COVID-19 worldwide from 2021 to 2024",data/time_series_covid19_deaths_global.csv
