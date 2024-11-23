@@ -23,28 +23,26 @@ def csv_to_sql(csv_name):
     csv_path = csv_name + ".csv"
     df = pd.read_csv(STORAGE_PATH/"datasets"/csv_path)
     engine = create_engine(f"sqlite:///{STORAGE_PATH / csv_name}.db")
-
     # TODO: Remove the if_exists="replace" later
     df.to_sql("SPI_index", engine, index=False, if_exists="replace")
+    
+
+
+
+
+def create_agent_executor(llm, csv_name, agent_type="openai-tools", verbose=False):
+    engine = create_engine(f"sqlite:///{STORAGE_PATH / csv_name}.db")
     db = SQLDatabase(engine=engine)
-    return db
-
-
-
-
-def create_agent_executor(llm, db, agent_type="openai-tools", verbose=False):
     agent_executor = create_sql_agent(llm, db=db, agent_type=agent_type, verbose=verbose)
     return agent_executor
 
 
 
 def main():
-    db = STORAGE_PATH/"time_series_covid19_deaths_global.db"
-    engine = create_engine(f"sqlite:///{db}")
-    db = SQLDatabase(engine=engine)
+    # db = csv_to_sql("SPI_index")
 
-    agent_executor = create_agent_executor(llm, db)
-    answer = agent_executor.invoke({"input": "how many cases in sum in Germany for the March 8,9 year 2023?"})
+    agent_executor = create_agent_executor(llm, "SPI_index")
+    answer = agent_executor.invoke({"input": "what is population of Denmark"})
     print(answer)
 
 
