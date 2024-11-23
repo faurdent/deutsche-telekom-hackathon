@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "deutsche-telekom-hackathon"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pandas = "^2.2.3"
+langchain = "^0.3.8"
+langchain-openai = "^0.2.9"
+langchain-community = "^0.3.8"
+langchain-experimental = "^0.3.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
