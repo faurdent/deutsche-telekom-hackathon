@@ -4,7 +4,10 @@ from dotenv import load_dotenv
 from langchain.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
 
-def get_dataset_name(csv_file: str) -> str:
+from .sql_query import STORAGE_PATH
+
+
+def get_dataset_description(csv_file: str) -> str:
 
     load_dotenv()
     data = pd.read_csv(csv_file)
@@ -22,9 +25,10 @@ def get_dataset_name(csv_file: str) -> str:
 
 
 def write_new_row(csv_file : str):
-    response = get_dataset_name(csv_file)
-    with open("backend/data/sum_dataset.csv", mode="a", newline='') as file:
-        csv.writer(file).writerow([f'{csv_file.split('/')[-1].replace(".csv", "")}',response])
+    response = get_dataset_description(csv_file)
+    with open( STORAGE_PATH / "sum_dataset.csv", mode="a", newline='') as file:
+        csv.writer(file).writerow([f'{csv_file.stem.split('/')[-1].replace(".csv", "")}', response])
+
 
 if __name__ == "__main__":
     csv_file = "backend/data/datasets/UNdata_Export_20241124_044258778.csv"

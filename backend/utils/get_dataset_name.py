@@ -2,11 +2,12 @@ import pandas as pd
 from dotenv import load_dotenv
 from langchain.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
+from .sql_query import STORAGE_PATH
 
 def get_dataset_name(user_query: str) -> str:
 
     load_dotenv()
-    csv_file = "backend/data/sum_dataset.csv"
+    csv_file = STORAGE_PATH / "sum_dataset.csv"
     data = pd.read_csv(csv_file)
 
     model = ChatOpenAI(model="gpt-4o")
