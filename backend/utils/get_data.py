@@ -33,7 +33,7 @@ def get_columns(csv_file: str, usr_q : str) -> str:
     response = get_dataset_columns(csv_file, usr_q)
     try:
         response = response.replace("\'",'').replace("\"",'').split(",")
-        data = pd.read_csv(csv_file)
+        data = pd.read_csv(csv_file).dropna()
         return [{'x': x, 'y': y} for x, y in zip(data[response[0]], data[response[1]])]
     except Exception as e:
         return []
