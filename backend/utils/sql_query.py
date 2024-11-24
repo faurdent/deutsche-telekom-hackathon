@@ -16,6 +16,7 @@ llm = ChatOpenAI(model="gpt-4o-mini")
 
 def csv_to_sql(csv_name) -> None:
     csv_path = csv_name + ".csv"
+    print(csv_path)
     df = pd.read_csv(STORAGE_PATH / "datasets" / csv_path)
 
     engine = create_engine(f"sqlite:///{STORAGE_PATH / csv_name}.db")
@@ -40,4 +41,5 @@ def setup_databases():
     datasets_dir = STORAGE_PATH / "datasets"
     for dataset in datasets_dir.iterdir():
        print(dataset)
-       csv_to_sql(dataset.stem.strip(".csv"))
+       print(dataset.stem)
+       csv_to_sql(dataset.stem)
