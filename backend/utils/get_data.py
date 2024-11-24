@@ -36,8 +36,7 @@ def get_columns(csv_file: str, usr_q : str) -> str:
         data = pd.read_csv(csv_file)
         return [{'x': x, 'y': y} for x, y in zip(data[response[0]], data[response[1]])]
     except Exception as e:
-        print(e)
-        return e
+        return []
 
 
 if __name__ == "__main__":
