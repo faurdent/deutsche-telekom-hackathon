@@ -1,10 +1,10 @@
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI, UploadFile, File, Form
+from fastapi import FastAPI, UploadFile, File, Form, Body
 from schemas import Message
 from utils import (get_sql_answer, setup_databases, get_dataset_name, 
                    add_dataset, csv_to_sql, write_new_row, STORAGE_PATH, get_columns)
-
+from fastapi.middleware.cors import CORSMiddleware
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -13,13 +13,21 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.post("/get-analytics")
 async def get_analytics(
     # save_file: bool, 
-    text: str = Form(),
+    text: str,
                         # file: UploadFile | None = File(None)
                     ):
+    print(text)
     
     # await add_dataset(file)
     # csv_to_sql(file.filename)

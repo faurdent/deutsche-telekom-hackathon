@@ -1,0 +1,31 @@
+{
+  "hash": "74bf7e28",
+  "configHash": "ac4a2c8e",
+  "lockfileHash": "f2bbff9d",
+  "browserHash": "b6a495af",
+  "optimized": {
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "0ccee3f1",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "787a25e2",
+      "needsInterop": true
+    },
+    "victory": {
+      "src": "../../node_modules/victory/es/index.js",
+      "file": "victory.js",
+      "fileHash": "a69eb205",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-DDNM7ENY": {
+      "file": "chunk-DDNM7ENY.js"
+    }
+  }
+}

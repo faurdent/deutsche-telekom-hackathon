@@ -2,7 +2,7 @@ import { useState } from 'react';
 import '../variables.css';
 import './Inputfield.css';
 
-function Inputfield({ onClick }) {
+function Inputfield({ onChange, onClick }) {
     const [active, setActive] = useState(false);
 
     return (
@@ -13,7 +13,7 @@ function Inputfield({ onClick }) {
                 style={ {background: active ? 'var(--color-primary)' : 'var(--color-secondary)'} }
                 type="text"
                 placeholder='write your query'
-                onChange={ (event) => setActive(event.target.value.length > 0) }
+                onChange={ function (event) {setActive(event.target.value.length > 0); onChange(event.target.value)} }
             />
             <button onClick={onClick}>
                 <div className="icon">
