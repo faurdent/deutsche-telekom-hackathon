@@ -1,0 +1,15 @@
+.button-add-files {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    color: var(--color-text-light);
+    background-color: var(--color-primary);
+    cursor: pointer;
+    border: none;
+    margin-left: 10px;
+    font-size: 20px;
+    font-weight: 500;
+    width: 40px;
+    height: 40px;
+}

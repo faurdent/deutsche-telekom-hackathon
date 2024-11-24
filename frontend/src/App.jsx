@@ -13,10 +13,12 @@ import {
     VictoryCandlestick,
     VictoryZoomContainer,
     Scale,
+    VictoryHistogram,
     // VictoryTheme
 } from "victory";
 import Footer from './components/Footer.jsx';
 import { useState } from 'react';
+import Button from './components/Button.jsx';
 
 function App() {
     const [sampleData, setSampleData] = useState([]);
@@ -25,20 +27,17 @@ function App() {
     const [query, setQuery] = useState('');
 
     const fetchData = async () => {
-        try {
-            const response = await fetch(`http://localhost:8000/get-analytics?text=${query}`, {
-                method: 'POST',
-                // headers: {
-                //     'Content-Type': 'application/json'
-                // },
-                // body: JSON.stringify({text: query})
-            });
-            console.log('Response:', response);
-            console.log('query:', test);
-        } catch (error) {
-            console.error('Error:', error);
-        }
+        const response = await fetch(`http://localhost:8000/get-analytics?text=${query}`, {
+            method: 'POST',
+            // headers: {
+            //     'Content-Type': 'application/json'
+            // },
+            // body: JSON.stringify({text: query})
+        });
+        console.log('Response:', response);
+        console.log('query:', query);
         const data = await response.json();
+        console.log('Data:', data);
         setResponse(data[0]['output']);
         setSampleData(data[1]);
         setDataVisibility(true);
@@ -91,6 +90,7 @@ function App() {
             }
             <div className='centering'>
                 <Inputfield onChange={setQuery} onClick={fetchData} />
+                <Button />
             </div>
             <Footer />
         </div>
