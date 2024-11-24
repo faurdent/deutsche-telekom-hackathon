@@ -11,7 +11,7 @@ def get_dataset_name(csv_file: str) -> str:
     data = data[:50]
     model = ChatOpenAI(model="gpt-4o", temperature=0)
 
-    template = "You are a CSV parsing assistant. Analyze the provided CSV file:{data}. You need to analyzeprovided csv and based on the data, you need to write short context about the data. Make it short and clear"
+    template = "You are a CSV parsing assistant. Analyze the provided CSV file:{data}. You need to analyzeprovided csv and based on the data, you need to write short context about the data. Make it short and clear and wrrite it all in one line"
 
     prompt_template = ChatPromptTemplate.from_template(template)
 
@@ -27,5 +27,5 @@ def write_new_row(csv_file : str):
         csv.writer(file).writerow([f'{csv_file.split('/')[-1].replace(".csv", "")}',response])
 
 if __name__ == "__main__":
-    csv_file = "backend/data/datasets/time_series_covid19_deaths_global.csv"
+    csv_file = "backend/data/datasets/UNdata_Export_20241124_044258778.csv"
     write_new_row(csv_file)
