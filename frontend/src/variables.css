@@ -1,0 +1,22 @@
+#root {
+    --color-primary: #e40074;
+    --color-secondary: #b5b5b5;
+    --color-text-light: #ffffff;
+    --color-text-dark: #212121;
+
+    --font-family: 'Montserrat', sans-serif;
+
+    --fz-body-l-medium: 22px;
+    --fz-body-m-regular: 18px;
+    --fz-body-m-medium: 18px;
+    --fz-body-s-regular: 16px;
+    --fz-body-s-medium: 16px;
+    --fz-body-xs-medium: 14px;
+
+    --lh-body-l-medium: 1.44;
+    --lh-body-m-regular: 1.32;
+    --lh-body-m-medium: 1.32;
+    --lh-body-s-regular: 1.48;
+    --lh-body-s-medium: 1.48;
+    --lh-body-xs-medium: 1.40;
+}

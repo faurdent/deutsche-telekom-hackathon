@@ -1,0 +1,14 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-family);
+}
+
+p {
+    /* font-size: var(--fz-body-m-medium); */
+    /* font-weight: 400; */
+    /* color: var(--color-text-dark); */
+    line-height: var(--lh-body-xs-medium);
+    font-weight: 500;
+}
