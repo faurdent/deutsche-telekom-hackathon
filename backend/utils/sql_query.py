@@ -1,51 +1,43 @@
 from langchain_openai import ChatOpenAI
 from langchain_community.utilities import SQLDatabase
+from langchain.agents.agent import AgentExecutor
+import sqlalchemy
 from sqlalchemy import create_engine
 from dotenv import load_dotenv
 from langchain_community.agent_toolkits import create_sql_agent
 from pathlib import Path
-import os
 import pandas as pd
-import getpass
-
-
 
 load_dotenv()
 
-
 STORAGE_PATH = Path(__file__).parent.parent / "data" 
 llm = ChatOpenAI(model="gpt-4o-mini")
-# engine = create_engine(f"sqlite:///{DATABASE_PATH}")
 
 
-def csv_to_sql(csv_name):
-
+def csv_to_sql(csv_name) -> None:
     csv_path = csv_name + ".csv"
-    df = pd.read_csv(STORAGE_PATH/"datasets"/csv_path)
+    df = pd.read_csv(STORAGE_PATH / "datasets" / csv_path)
+
     engine = create_engine(f"sqlite:///{STORAGE_PATH / csv_name}.db")
-    # TODO: Remove the if_exists="replace" later
-    df.to_sql("SPI_index", engine, index=False, if_exists="replace")
+    if sqlalchemy.inspect(engine).get_table_names():
+        return
     
+    df.to_sql(csv_name, engine, index=False)
 
 
-
-
-def create_agent_executor(llm, csv_name, agent_type="openai-tools", verbose=False):
-    engine = create_engine(f"sqlite:///{STORAGE_PATH / csv_name}.db")
+def create_agent_executor(llm, db_name, agent_type="openai-tools", verbose=False) -> AgentExecutor:
+    engine = create_engine(f"sqlite:///{STORAGE_PATH / db_name}.db")
     db = SQLDatabase(engine=engine)
     agent_executor = create_sql_agent(llm, db=db, agent_type=agent_type, verbose=verbose)
     return agent_executor
 
 
-
-def main():
-    # db = csv_to_sql("SPI_index")
-
-    agent_executor = create_agent_executor(llm, "SPI_index")
-    answer = agent_executor.invoke({"input": "what is population of Denmark"})
-    print(answer)
+async def get_sql_answer(question: str, db_name: str):
+    return await create_agent_executor(llm, db_name).ainvoke({"input": question})
 
 
-
-if __name__ == "__main__":
-    main()
+def setup_databases():
+    datasets_dir = STORAGE_PATH / "datasets"
+    for dataset in datasets_dir.iterdir():
+       print(dataset)
+       csv_to_sql(dataset.stem.strip(".csv"))

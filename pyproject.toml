@@ -12,6 +12,7 @@ langchain = "^0.3.8"
 langchain-openai = "^0.2.9"
 langchain-community = "^0.3.8"
 langchain-experimental = "^0.3.3"
+fastapi = {extras = ["standard"], version = "^0.115.5"}
 
 
 [build-system]
